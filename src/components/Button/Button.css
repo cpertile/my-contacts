@@ -16,6 +16,10 @@ button {
 button[data-variant="primary"] {
 	background-color: #ff005a;
 	color: white;
+
+	&:hover {
+		background-color: #ff4d8c;
+	}
 }
 
 button[data-variant="secondary"] {
@@ -33,5 +37,5 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto black;
 }
