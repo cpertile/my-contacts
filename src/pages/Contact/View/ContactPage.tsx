@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Button from '../../../components/Button/Button';
 import { Contact, INITIAL_CONTACT, useContactsAPI } from '../../../hooks/useContactsAPI';
 import './ContactPage.css';
-import Button from '../../../components/Button/Button';
 
 const ContactPage: React.FC = () => {
 	const [contact, setContact] = useState<Contact>(INITIAL_CONTACT)
@@ -25,16 +25,27 @@ const ContactPage: React.FC = () => {
 
 	return (
 		<div id='contact'>
-			<div>
-				<span id='contact-name-and-favorite'>
-					<h1>{contact?.name.first} {contact?.name.last}</h1>
-					<span>{contact?.favorite ? '★' : '☆'}</span>
-				</span>
-				{contact?.email && <p>{contact.email}</p>}
-				{contact?.phone && <p>{contact.phone}</p>}
+			<span id='contact-name-and-favorite'>
+				<h1>{contact.name.first} {contact.name.last}</h1>
+				<span>{contact.favorite ? '★' : '☆'}</span>
+			</span>
+			{contact.picture?.medium ?
+				<img
+					className='contact-picture'
+					key={contact.picture.medium}
+					src={contact.picture.medium}
+				/>
+				:
+				<div className='contact-picture initials'>
+					{`${contact.name.first[0]?.toUpperCase()}${contact.name.last[0]?.toUpperCase()}`}
+				</div>
+			}
+			{contact.email && <p>{contact.email}</p>}
+			{contact.phone && <p>{contact.phone}</p>}
+			<span className='action-buttons'>
 				<Button data-variant='secondary' onClick={handleEdit}>Editar</Button>
 				<Button data-variant='delete' onClick={handleDelete}>Excluir</Button>
-			</div>
+			</span>
 		</div>
 	)
 }

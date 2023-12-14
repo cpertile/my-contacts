@@ -6,12 +6,10 @@ const fakeNamesUrl = 'https://randomuser.me/api/?nat=br&inc=name,email,phone,pic
 
 export const INITIAL_CONTACT: Contact = {
 	id: 0,
-	name: {
-		first: '',
-		last: ''
-	},
+	name: { first: '', last: '' },
 	email: '',
 	phone: '',
+	picture: { medium: '' },
 	favorite: false
 }
 
@@ -20,7 +18,7 @@ export type Contact = {
 	name: { first: string, last: string }
 	email?: string
 	phone?: string
-	picture?: string
+	picture?: { medium: string }
 	favorite: boolean
 }
 
@@ -50,16 +48,7 @@ export function useContactsAPI() {
 
 	const findContactById = useCallback((id: number) => {
 		const result = state.contacts.find(contact => contact.id === id)
-		return result || {
-			id: 0,
-			name: {
-				first: '',
-				last: ''
-			},
-			email: '',
-			phone: '',
-			favorite: false
-		}
+		return result || INITIAL_CONTACT
 	}, [state.contacts])
 
 	function saveContact(contact: Contact) {

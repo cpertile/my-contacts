@@ -1,19 +1,21 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Contact, useContactsAPI } from './useContactsAPI'
-const INITIAL_CONTACT_INFO = {
+
+const INITIAL_FORM_DATA = {
 	id: 0,
 	firstName: '',
 	lastName: '',
 	email: '',
 	phone: '',
+	picture: '',
 	favorite: false
 }
 
 export function useForm() {
+	const [contactInfo, setContactInfo] = useState(INITIAL_FORM_DATA)
 	const { saveContact } = useContactsAPI()
 	const navigate = useNavigate()
-	const [contactInfo, setContactInfo] = useState(INITIAL_CONTACT_INFO)
 
 	function handleChange(e: ChangeEvent<HTMLInputElement>) {
 		e.preventDefault()
@@ -47,11 +49,21 @@ export function useForm() {
 			},
 			phone: contactInfo.phone,
 			email: contactInfo.email,
-			favorite: contactInfo.favorite
+			favorite: contactInfo.favorite,
+			picture: { medium: contactInfo.picture }
 		}
 		const result = saveContact(formattedContact)
 
 		navigate(`/contatos/${result.id}`)
+	}
+
+	function handleCancel(e: FormEvent) {
+		e.preventDefault()
+		if (contactInfo.id === 0) {
+			navigate('/')
+		} else {
+			navigate(`/contatos/${contactInfo.id}`)
+		}
 	}
 
 	return {
@@ -59,6 +71,7 @@ export function useForm() {
 		setContactInfo,
 		handleChange,
 		handleFavorite,
-		handleSubmit
+		handleSubmit,
+		handleCancel
 	}
 }

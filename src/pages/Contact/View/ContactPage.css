@@ -1,9 +1,44 @@
+#contact {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+	
+	> p {
+		margin: 0;
+	}
+}
+
 #contact-name-and-favorite {
 	display: flex;
-	gap: 12px;
+	gap: 1rem;
 	align-items: center;
 
 	> span {
 		font-size: xx-large;
+	}
+}
+
+.action-buttons {
+	display: flex;
+	gap: 1.5rem;
+	grid-row: 5;
+	grid-column: 2; 
+}
+
+.contact-picture {
+	width: 76px;
+	height: 76px;
+	border-radius: 50%;
+	border: 2px solid #ff005a;
+	box-shadow: 0 3px 3px hsla(0, 0%, 0%, 0.2), 0 3px 3px hsla(0, 0%, 0%, 0.2);
+
+	&.initials {
+		background-image: linear-gradient(to bottom, white, lightgrey);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: 700;
+		color: #ff005a;
+		font-size: 1.75rem;
 	}
 }
