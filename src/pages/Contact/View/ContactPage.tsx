@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useContactsAPI } from '../../hooks/useContactsAPI';
+import { useContactsAPI } from '../../../hooks/useContactsAPI';
 import './ContactPage.css';
-import Button from '../../components/Button/Button';
+import Button from '../../../components/Button/Button';
 
 export type Contact = {
 	id: number
@@ -16,12 +16,12 @@ export type Contact = {
 const ContactPage: React.FC = () => {
 	const [contact, setContact] = useState<Contact>()
 	const { contactId } = useParams()
-	const { findById } = useContactsAPI()
+	const { findContactById } = useContactsAPI()
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		contactId && setContact(findById(parseInt(contactId)))
-	}, [contactId, findById])
+		contactId && setContact(findContactById(parseInt(contactId)))
+	}, [contactId, findContactById])
 
 	return (
 		<div id='contact'>

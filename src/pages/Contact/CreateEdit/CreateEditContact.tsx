@@ -1,67 +1,26 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Button from '../../../components/Button/Button'
 import Input from '../../../components/Input/Input'
 import { useContactsAPI } from '../../../hooks/useContactsAPI'
-import { Contact } from '../ContactPage'
+import { useForm } from '../../../hooks/useForm'
+import './CreateEditContact.css'
 
-const EditContactPage: React.FC = () => {
-	const { findById, changeContact } = useContactsAPI()
+const CreateEditContactPage: React.FC = () => {
+	const { findContactById } = useContactsAPI()
 	const { contactId } = useParams()
 	const navigate = useNavigate()
-
-	const [contactInfo, setContactInfo] = useState({
-		id: 0,
-		firstName: '',
-		lastName: '',
-		email: '',
-		phone: '',
-		favorite: false
-	})
-
-	function handleChange(e: ChangeEvent<HTMLInputElement>) {
-		e.preventDefault()
-		let targetValue = e.target.value
-		
-		if (e.target.name === 'phone') {
-			let phone = targetValue.replace(/\D/g, '')
-			phone = phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
-			targetValue = phone
-		}
-
-		setContactInfo(prevState => ({
-			...prevState,
-			[e.target.name]: targetValue
-		}))
-	}
-
-	function handleSubmit(e: FormEvent) {
-		e.preventDefault()
-		const formattedContact: Contact = {
-			id: contactInfo.id,
-			name: {
-				first: contactInfo.firstName,
-				last: contactInfo.lastName
-			},
-			phone: contactInfo.phone,
-			email: contactInfo.email,
-			favorite: contactInfo.favorite
-		}
-		const editedContact = changeContact(formattedContact)
-
-		navigate(`/contatos/${editedContact.id}`)
-	}
-
-	function handleFavorite() {
-		setContactInfo(prevState => ({
-			...prevState,
-			favorite: !prevState.favorite
-		}))
-	}
+	const {
+		contactInfo,
+		setContactInfo,
+		handleChange,
+		handleFavorite,
+		handleSubmit
+	} = useForm()
 
 	useEffect(() => {
 		if (contactId) {
-			const contact = findById(parseInt(contactId))
+			const contact = findContactById(parseInt(contactId))
 			setContactInfo({
 				id: contact?.id || 0,
 				firstName: contact?.name.first || '',
@@ -71,7 +30,7 @@ const EditContactPage: React.FC = () => {
 				favorite: contact?.favorite || false
 			})
 		}
-	}, [contactId, contactInfo.id, findById])
+	}, [contactId, contactInfo.id, findContactById, setContactInfo])
 
 	return (
 		<div id="edit-contact-page">
@@ -136,4 +95,4 @@ const EditContactPage: React.FC = () => {
 	)
 }
 
-export default EditContactPage
+export default CreateEditContactPage

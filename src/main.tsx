@@ -3,11 +3,10 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.tsx'
 import './index.css'
-import ContactPage from './pages/Contact/ContactPage.tsx'
+import ContactPage from './pages/Contact/View/ContactPage.tsx'
+import CreateEditContactPage from './pages/Contact/CreateEdit/CreateEditContact.tsx'
 import ErrorPage from './pages/Error/ErrorPage.tsx'
-import NewContactPage from './pages/Contact/New/NewContactPage.tsx'
 import { Provider } from './store/Provider.tsx'
-import EditContactPage from './pages/Contact/Edit/EditContactPage.tsx'
 
 const router = createBrowserRouter([
 	{
@@ -21,11 +20,11 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'contatos/novo',
-				element: <NewContactPage />
+				element: <CreateEditContactPage />
 			},
 			{
 				path: 'contatos/:contactId/editar',
-				element: <EditContactPage />
+				element: <CreateEditContactPage />
 			}
 		]
 	},

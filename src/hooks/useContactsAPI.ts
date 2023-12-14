@@ -1,7 +1,7 @@
 // This hook will provide the application with an API to get, put, post and delete contacts
 import { useCallback, useContext } from 'react'
+import { Contact } from '../pages/Contact/View/ContactPage'
 import { ContactsContext } from '../store/Context'
-import { Contact } from '../pages/Contact/ContactPage'
 
 const fakeNamesUrl = 'https://randomuser.me/api/?nat=br&inc=name,email,phone,picture&seed=iob&results=36'
 
@@ -23,17 +23,16 @@ export function useContactsAPI() {
 		setLoadedValues(results)
 	}, [setLoadedValues])
 
-	const findById = useCallback((id: number) => {
+	const findContactById = useCallback((id: number) => {
 		return state.contacts.find(contact => contact.id === id)
 	}, [state.contacts])
 
-	function createContact(contact: Contact) {
-		const newContact = { ...contact, id: state.contacts.length + 1 }
-		addContact(newContact)
-		return newContact
-	}
-
-	function changeContact(contact: Contact) {
+	function saveContact(contact: Contact) {
+		if (contact.id === 0) {
+			const newContact = { ...contact, id: state.contacts.length + 1 }
+			addContact(newContact)
+			return newContact
+		}
 		editContact(contact)
 		return contact
 	}
@@ -42,8 +41,7 @@ export function useContactsAPI() {
 		state,
 		loadFakeNames,
 		cleanList,
-		findById,
-		createContact,
-		changeContact
+		findContactById,
+		saveContact
 	}
 }

@@ -1,5 +1,5 @@
 import { ReactNode, useReducer } from 'react'
-import { Contact } from '../pages/Contact/ContactPage'
+import { Contact } from '../pages/Contact/View/ContactPage'
 import { ActionTypes } from '../types/enums'
 import { ContactsContext, initialState } from './Context'
 import { ContactsReducer } from './Reducer'
