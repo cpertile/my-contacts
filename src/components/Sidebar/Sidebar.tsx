@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useContactsAPI } from '../../hooks/useContactsAPI'
 import Button from '../Button/Button'
 import './Sidebar.css'
@@ -18,9 +18,10 @@ const Sidebar: React.FC = () => {
 					<ul>
 						{state.contacts.map(contact => (
 							<li key={contact.phone}>
-								<Link to={`contatos/${contact.id}`}>
+								<NavLink to={`contatos/${contact.id}`}>
 									{contact.name.first} {contact.name.last}
-								</Link>
+									{contact.favorite && <span>★</span>}
+								</NavLink>
 							</li>
 						))}
 					</ul>
