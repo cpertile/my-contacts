@@ -1,12 +1,37 @@
 // This hook will provide the application with an API to get, put, post and delete contacts
 import { useCallback, useContext } from 'react'
-import { Contact } from '../pages/Contact/View/ContactPage'
 import { ContactsContext } from '../store/Context'
 
 const fakeNamesUrl = 'https://randomuser.me/api/?nat=br&inc=name,email,phone,picture&seed=iob&results=36'
 
+export const INITIAL_CONTACT: Contact = {
+	id: 0,
+	name: {
+		first: '',
+		last: ''
+	},
+	email: '',
+	phone: '',
+	favorite: false
+}
+
+export type Contact = {
+	id: number
+	name: { first: string, last: string }
+	email?: string
+	phone?: string
+	picture?: string
+	favorite: boolean
+}
+
 export function useContactsAPI() {
-	const { state, setLoadedValues, addContact, editContact } = useContext(ContactsContext)
+	const {
+		state,
+		setLoadedValues,
+		addContact,
+		editContact,
+		removeContact
+	} = useContext(ContactsContext)
 
 	function cleanList() {
 		setLoadedValues([])
@@ -24,7 +49,17 @@ export function useContactsAPI() {
 	}, [setLoadedValues])
 
 	const findContactById = useCallback((id: number) => {
-		return state.contacts.find(contact => contact.id === id)
+		const result = state.contacts.find(contact => contact.id === id)
+		return result || {
+			id: 0,
+			name: {
+				first: '',
+				last: ''
+			},
+			email: '',
+			phone: '',
+			favorite: false
+		}
 	}, [state.contacts])
 
 	function saveContact(contact: Contact) {
@@ -37,11 +72,16 @@ export function useContactsAPI() {
 		return contact
 	}
 
+	function deleteContact(contact: Contact) {
+		removeContact(contact.id)
+	}
+
 	return {
 		state,
 		loadFakeNames,
 		cleanList,
 		findContactById,
-		saveContact
+		saveContact,
+		deleteContact
 	}
 }

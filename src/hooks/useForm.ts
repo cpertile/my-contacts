@@ -1,19 +1,19 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Contact } from '../pages/Contact/View/ContactPage'
-import { useContactsAPI } from './useContactsAPI'
+import { Contact, useContactsAPI } from './useContactsAPI'
+const INITIAL_CONTACT_INFO = {
+	id: 0,
+	firstName: '',
+	lastName: '',
+	email: '',
+	phone: '',
+	favorite: false
+}
 
 export function useForm() {
 	const { saveContact } = useContactsAPI()
 	const navigate = useNavigate()
-	const [contactInfo, setContactInfo] = useState({
-		id: 0,
-		firstName: '',
-		lastName: '',
-		email: '',
-		phone: '',
-		favorite: false
-	})
+	const [contactInfo, setContactInfo] = useState(INITIAL_CONTACT_INFO)
 
 	function handleChange(e: ChangeEvent<HTMLInputElement>) {
 		e.preventDefault()

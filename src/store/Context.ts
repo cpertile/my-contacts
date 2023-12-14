@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createContext } from 'react';
-import { Contact } from '../pages/Contact/View/ContactPage';
+import { Contact } from '../hooks/useContactsAPI';
 
 export const initialState = {
 	contacts: [] as Contact[]

@@ -1,27 +1,27 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useContactsAPI } from '../../../hooks/useContactsAPI';
+import { Contact, INITIAL_CONTACT, useContactsAPI } from '../../../hooks/useContactsAPI';
 import './ContactPage.css';
 import Button from '../../../components/Button/Button';
 
-export type Contact = {
-	id: number
-	name: { first: string, last: string }
-	email?: string
-	phone?: string
-	picture?: string
-	favorite: boolean
-}
-
 const ContactPage: React.FC = () => {
-	const [contact, setContact] = useState<Contact>()
+	const [contact, setContact] = useState<Contact>(INITIAL_CONTACT)
 	const { contactId } = useParams()
-	const { findContactById } = useContactsAPI()
+	const { findContactById, deleteContact } = useContactsAPI()
 	const navigate = useNavigate()
 
 	useEffect(() => {
 		contactId && setContact(findContactById(parseInt(contactId)))
 	}, [contactId, findContactById])
+
+	function handleEdit() {
+		navigate(`/contatos/${contact?.id}/editar`)
+	}
+
+	function handleDelete() {
+		deleteContact(contact)
+		navigate(`/`)
+	}
 
 	return (
 		<div id='contact'>
@@ -32,8 +32,8 @@ const ContactPage: React.FC = () => {
 				</span>
 				{contact?.email && <p>{contact.email}</p>}
 				{contact?.phone && <p>{contact.phone}</p>}
-				<Button data-variant='secondary' onClick={() => navigate(`/contatos/${contact?.id}/editar`)}>Editar</Button>
-				<Button data-variant='delete'>Excluir</Button>
+				<Button data-variant='secondary' onClick={handleEdit}>Editar</Button>
+				<Button data-variant='delete' onClick={handleDelete}>Excluir</Button>
 			</div>
 		</div>
 	)

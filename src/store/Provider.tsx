@@ -1,8 +1,8 @@
 import { ReactNode, useReducer } from 'react'
-import { Contact } from '../pages/Contact/View/ContactPage'
 import { ActionTypes } from '../types/enums'
 import { ContactsContext, initialState } from './Context'
 import { ContactsReducer } from './Reducer'
+import { Contact } from '../hooks/useContactsAPI'
 
 interface ProviderProps {
 	children: ReactNode
