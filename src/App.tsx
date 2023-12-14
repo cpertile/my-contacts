@@ -1,43 +1,38 @@
-import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import Button from './components/Button/Button';
+import { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar/Sidebar';
 import { useContactsAPI } from './hooks/useContactsAPI';
+import WelcomePage from './pages/Welcome/WelcomePage';
+import { Choices } from './types/enums';
 
 function App() {
-	const { loadFakeNames } = useContactsAPI()
 	const [isReady, setIsReady] = useState(false)
+	const { loadFakeNames } = useContactsAPI()
+	const navigate = useNavigate()
 
-	function handleChoice(choice: 'populated' | 'empty') {
-		if (choice === 'populated') {
-			loadFakeNames()
+	async function handleChoice(choice: Choices) {
+		if (choice === Choices.populated) {
+			await loadFakeNames()
 		}
 		setIsReady(true)
 	}
 
+	useEffect(() => {
+		// Reseta a URL quando o app é atualizado
+		return () => navigate('/')
+	}, [navigate])
+
 	return (
 		<>
-			<Sidebar />
-			<div id='content'>
-				{!isReady ?
-					<>
-						<h1>Gerenciador de Contatos</h1>
-						Selecione uma opção para prosseguir:
-						<Button
-							data-variant='primary'
-							onClick={() => handleChoice('populated')}
-						>
-							Lista populada
-						</Button>
-						<Button
-							data-variant='secondary'
-							onClick={() => handleChoice('empty')}
-						>
-							Lista vazia
-						</Button>
-					</>
-					: <Outlet />}
-			</div>
+			{!isReady ?
+				<WelcomePage handleChoice={handleChoice} />
+				: <>
+					<Sidebar />
+					<main id='content'>
+						<Outlet />
+					</main>
+				</>
+			}
 		</>
 	)
 }

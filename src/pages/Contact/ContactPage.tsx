@@ -1,7 +1,7 @@
-import { useParams } from 'react-router-dom';
-import './ContactPage.css';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useContactsAPI } from '../../hooks/useContactsAPI';
+import './ContactPage.css';
 
 export type Contact = {
 	id: number

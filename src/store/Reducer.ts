@@ -1,11 +1,5 @@
+import { ActionTypes } from '../types/enums';
 import { InitialStateType, initialState } from './Context';
-
-export enum ActionTypes {
-	setLoadedValues = 'load',
-	addContact = 'add',
-	removeContact = 'remove',
-	editContact = 'edit'
-}
 
 export interface DispatchAction {
 	type: ActionTypes;
@@ -16,7 +10,6 @@ export interface DispatchAction {
 export const ContactsReducer = (state = initialState, action: DispatchAction): InitialStateType => {
 	switch (action.type) {
 		case ActionTypes.setLoadedValues:
-			console.log('ActionTypes.setLoadedValues :>> ', action.payload);
 			return { ...state, contacts: action.payload }
 
 		case ActionTypes.addContact:

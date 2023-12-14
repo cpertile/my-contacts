@@ -25,6 +25,10 @@ button[data-variant="primary"] {
 button[data-variant="secondary"] {
 	background-color: white;
 	color: #ff005a;
+	
+	&:hover {
+		background-color: #eee;
+	}
 }
 
 button[data-variant="delete"] {
