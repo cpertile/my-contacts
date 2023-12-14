@@ -1,16 +1,17 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useContactsAPI } from '../../hooks/useContactsAPI'
 import Button from '../Button/Button'
 import './Sidebar.css'
 
 const Sidebar: React.FC = () => {
 	const { state } = useContactsAPI()
+	const navigate = useNavigate()
 
 	return (
 		<div id='sidebar'>
 			<span>
 				<h1>Meus Contatos</h1>
-				<Button data-variant='primary'>Novo</Button>
+				<Button data-variant='primary' onClick={() => navigate('/contatos/novo')}>Novo</Button>
 			</span>
 			<nav>
 				{state.contacts.length > 0 ?

@@ -7,19 +7,20 @@ import { Choices } from './types/enums';
 
 function App() {
 	const [isReady, setIsReady] = useState(false)
-	const { loadFakeNames } = useContactsAPI()
+	const { loadFakeNames, cleanList } = useContactsAPI()
 	const navigate = useNavigate()
 
 	async function handleChoice(choice: Choices) {
 		if (choice === Choices.populated) {
 			await loadFakeNames()
+		} else if (choice === Choices.empty) {
+			cleanList()
 		}
 		setIsReady(true)
 	}
 
-	useEffect(() => {
-		// Reseta a URL quando o app é atualizado
-		return () => navigate('/')
+	useEffect(() => { // Reseta a URL quando o app é atualizado
+		navigate('/')
 	}, [navigate])
 
 	return (

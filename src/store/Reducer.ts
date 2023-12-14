@@ -13,8 +13,7 @@ export const ContactsReducer = (state = initialState, action: DispatchAction): I
 			return { ...state, contacts: action.payload }
 
 		case ActionTypes.addContact:
-			// return { ...state.contacts = [action.payload, ...state.contacts] }
-			break;
+			return { ...state, contacts: [...state.contacts, action.payload] }
 
 		case ActionTypes.editContact:
 			break;
