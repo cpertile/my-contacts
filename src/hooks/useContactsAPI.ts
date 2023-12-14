@@ -6,7 +6,7 @@ import { Contact } from '../pages/Contact/ContactPage'
 const fakeNamesUrl = 'https://randomuser.me/api/?nat=br&inc=name,email,phone,picture&seed=iob&results=36'
 
 export function useContactsAPI() {
-	const { state, setLoadedValues, addContact } = useContext(ContactsContext)
+	const { state, setLoadedValues, addContact, editContact } = useContext(ContactsContext)
 
 	function cleanList() {
 		setLoadedValues([])
@@ -17,15 +17,15 @@ export function useContactsAPI() {
 		const { results } = await response.json()
 
 		for (let i = 0; i < results.length; i++) {
-			results[i] = { ...results[i], id: i + 1 }
+			results[i] = { ...results[i], id: i + 1, favorite: false }
 		}
 
 		setLoadedValues(results)
 	}, [setLoadedValues])
 
-	function findById(id: number) {
+	const findById = useCallback((id: number) => {
 		return state.contacts.find(contact => contact.id === id)
-	}
+	}, [state.contacts])
 
 	function createContact(contact: Contact) {
 		const newContact = { ...contact, id: state.contacts.length + 1 }
@@ -33,11 +33,17 @@ export function useContactsAPI() {
 		return newContact
 	}
 
+	function changeContact(contact: Contact) {
+		editContact(contact)
+		return contact
+	}
+
 	return {
 		state,
 		loadFakeNames,
 		cleanList,
 		findById,
-		createContact
+		createContact,
+		changeContact
 	}
 }

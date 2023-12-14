@@ -1,0 +1,9 @@
+#contact-name-and-favorite {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+
+	> span {
+		font-size: xx-large;
+	}
+}

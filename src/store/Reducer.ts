@@ -8,15 +8,20 @@ export interface DispatchAction {
 }
 
 export const ContactsReducer = (state = initialState, action: DispatchAction): InitialStateType => {
+	let elementIndex
+	let updatedState
 	switch (action.type) {
 		case ActionTypes.setLoadedValues:
 			return { ...state, contacts: action.payload }
 
 		case ActionTypes.addContact:
-			return { ...state, contacts: [...state.contacts, action.payload] }
+			return { ...state, contacts: [action.payload, ...state.contacts] }
 
 		case ActionTypes.editContact:
-			break;
+			elementIndex = state.contacts.findIndex(ct => ct.id === action.payload.id)
+			updatedState = [...state.contacts]
+			updatedState[elementIndex] = action.payload
+			return { ...state, contacts: updatedState }
 
 		case ActionTypes.removeContact:
 			break;

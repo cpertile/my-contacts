@@ -7,7 +7,7 @@
 	height: 100%;
 }
 
-#sidebar span {
+#sidebar >span {
 	display: flex;
 	padding: 1rem 1.5rem;
 	justify-content: space-between;
