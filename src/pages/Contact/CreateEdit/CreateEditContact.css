@@ -1,0 +1,36 @@
+#edit-contact-page,
+#new-contact-page {
+	display: flex;
+	flex-direction: column;
+	max-width: 18rem;
+}
+
+.form {
+	margin-top: 2rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	gap: 1rem;
+	text-align: center;
+
+	> label {
+		grid-column: 1;
+	}
+
+	> input {
+		grid-column: 2;
+
+		&#last-name {
+			grid-column: 3;
+		}
+	}
+
+	> button {
+		grid-column: 4;
+	}
+	
+	> .field-set {
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+	}
+}
