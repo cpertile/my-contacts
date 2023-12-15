@@ -10,7 +10,7 @@ import { Provider } from './store/Provider.tsx'
 
 const router = createBrowserRouter([
 	{
-		path: '/',
+		path: '/my-contacts',
 		element: <App />,
 		errorElement: <ErrorPage />,
 		children: [
