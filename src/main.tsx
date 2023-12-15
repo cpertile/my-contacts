@@ -10,20 +10,20 @@ import { Provider } from './store/Provider.tsx'
 
 const router = createBrowserRouter([
 	{
-		path: '/*',
+		path: '/',
 		element: <App />,
 		errorElement: <ErrorPage />,
 		children: [
 			{
-				path: 'my-contacts/contatos/:contactId',
+				path: 'contatos/:contactId',
 				element: <ContactPage />,
 			},
 			{
-				path: 'my-contacts/contatos/novo',
+				path: 'contatos/novo',
 				element: <CreateEditContactPage />
 			},
 			{
-				path: 'my-contacts/contatos/:contactId/editar',
+				path: 'contatos/:contactId/editar',
 				element: <CreateEditContactPage />
 			}
 		]
