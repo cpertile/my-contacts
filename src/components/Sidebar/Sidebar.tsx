@@ -15,7 +15,7 @@ const Sidebar: React.FC = () => {
 			</span>
 			<nav>
 				{state.contacts.length > 0 ?
-					<ul>
+					<ul data-testid='sidebar-list'>
 						{state.contacts.map(contact => (
 							<li key={contact.phone}>
 								<NavLink to={`contatos/${contact.id}`}>

@@ -24,9 +24,9 @@ const ContactPage: React.FC = () => {
 	}
 
 	return (
-		<div id='contact'>
+		<div id='contact' data-testid='contact-information'>
 			<span id='contact-name-and-favorite'>
-				<h1>{contact.name.first} {contact.name.last}</h1>
+				<h1 data-testid='name-display'>{contact.name.first} {contact.name.last}</h1>
 				<span>{contact.favorite ? '★' : '☆'}</span>
 			</span>
 			{contact.picture?.medium ?

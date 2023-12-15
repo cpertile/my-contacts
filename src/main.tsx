@@ -30,10 +30,18 @@ const router = createBrowserRouter([
 	},
 ])
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const Main = () => (
 	<React.StrictMode>
 		<Provider>
 			<RouterProvider router={router} />
 		</Provider>
-	</React.StrictMode>,
+	</React.StrictMode>
 )
+if (process.env.NODE_ENV === 'test') {
+	ReactDOM.createRoot(document.createElement('div')).render(<Main />)
+} else {
+	ReactDOM.createRoot(document.getElementById('root')!).render(<Main />)
+}
+
+
+export default Main

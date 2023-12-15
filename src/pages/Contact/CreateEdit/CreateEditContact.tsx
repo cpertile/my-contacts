@@ -42,6 +42,7 @@ const CreateEditContactPage: React.FC = () => {
 					required
 					id='first-name'
 					name='firstName'
+					data-testid='firstname-field'
 					placeholder='Primeiro nome'
 					aria-label='first name'
 					value={contactInfo.firstName}
@@ -51,6 +52,7 @@ const CreateEditContactPage: React.FC = () => {
 					required
 					id='last-name'
 					name='lastName'
+					data-testid='lastname-field'
 					placeholder='Sobrenome'
 					aria-label='last name'
 					value={contactInfo.lastName}
@@ -65,6 +67,7 @@ const CreateEditContactPage: React.FC = () => {
 					id='email'
 					name='email'
 					type='email'
+					data-testid='email-field'
 					placeholder='email@exemplo.com.br'
 					aria-label='email'
 					value={contactInfo.email}
@@ -75,6 +78,7 @@ const CreateEditContactPage: React.FC = () => {
 				<Input
 					id='phone'
 					name='phone'
+					data-testid='phone-field'
 					placeholder='(41) 99887-6655'
 					aria-label='phone'
 					value={contactInfo.phone}
@@ -86,6 +90,7 @@ const CreateEditContactPage: React.FC = () => {
 				<Input
 					id='picture'
 					name='picture'
+					data-testid='picture-field'
 					placeholder='http://perfil.com/foto.png'
 					aria-label='profile picture'
 					value={contactInfo.picture}
@@ -93,8 +98,19 @@ const CreateEditContactPage: React.FC = () => {
 				/>
 
 				<span className='action-buttons'>
-					<Button data-variant='secondary' type='submit'>Salvar</Button>
-					<Button onClick={handleCancel}>Cancelar</Button>
+					<Button
+						type='submit'
+						data-testid='submit-button'
+						data-variant='secondary'
+					>
+						Salvar
+					</Button>
+					<Button
+						onClick={handleCancel}
+						data-testid='cancel-button'
+					>
+						Cancelar
+					</Button>
 				</span>
 			</form>
 		</div >
