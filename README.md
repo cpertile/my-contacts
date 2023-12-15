@@ -25,6 +25,9 @@ Para executar o Gerenciador de Contatos localmente, siga estas etapas:
 - **Componentização:**
    - Componentes de ui (`src/components`) => Button e Input implementam "Composição de Componentes" para extender de forma centralizada as funcionalidades padrão, sendo reutilizáveis.
    - Componentes de apresentação (`src/pages`) => a página `CreateEditContact` é modular e se adapta aos dois formulários: criação e edição.
+ 
+- **Roteamento:**
+   - Utilizado o `browserRouter` padrão, com uma interface fixa composta pela Sidebar e o espaço em branco ao lado (Outlet). Todas as rotas são subrotas da raiz, e renderizam substituindo o Outlet.
   
 - **Custom Hooks:** A aplicação conta com 2 hooks utilitários em `src/hooks`:
    - `useForm` => reúne os estados e lógica necessários (e repetitivos) para lidar com formulários
