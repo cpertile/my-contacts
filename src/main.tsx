@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.tsx'
 import './index.css'
-import CreateEditContactPage from './pages/Contact/CreateEdit/CreateEditContact.tsx'
 import ContactPage from './pages/Contact/View/ContactPage.tsx'
+import CreateEditContactPage from './pages/Contact/CreateEdit/CreateEditContact.tsx'
 import ErrorPage from './pages/Error/ErrorPage.tsx'
 import { Provider } from './store/Provider.tsx'
 
 const router = createBrowserRouter([
 	{
-		path: '/*',
+		path: '/',
 		element: <App />,
 		errorElement: <ErrorPage />,
 		children: [

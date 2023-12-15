@@ -9,7 +9,6 @@
 - **React Testing Library:** Assegurar funcionalidade correta.
 - **TypeScript:** Tipagem para desenvolvimento mais robusto.
 - **ESLint:** Verificação de sintaxe e padrões de código.
-- **GitHub Pages:** Hospedagem de páginas estáticas.
 
 ## Instruções para rodar em Localhost
 Para executar o Gerenciador de Contatos localmente, siga estas etapas:
