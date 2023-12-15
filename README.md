@@ -6,6 +6,7 @@
 - **React:** Construção de componentes.
 - **React Router:** Facilita a navegação.
 - **ContextAPI:** Compartilhamento de estado.
+- **React Testing Library:** Assegurar funcionalidade correta.
 - **TypeScript:** Tipagem para desenvolvimento mais robusto.
 - **ESLint:** Verificação de sintaxe e padrões de código.
 
