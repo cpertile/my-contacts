@@ -15,15 +15,15 @@ const router = createBrowserRouter([
 		errorElement: <ErrorPage />,
 		children: [
 			{
-				path: 'contatos/:contactId',
+				path: '*/contatos/:contactId',
 				element: <ContactPage />,
 			},
 			{
-				path: 'contatos/novo',
+				path: '*/contatos/novo',
 				element: <CreateEditContactPage />
 			},
 			{
-				path: 'contatos/:contactId/editar',
+				path: '*/contatos/:contactId/editar',
 				element: <CreateEditContactPage />
 			}
 		]
